@@ -18,7 +18,8 @@ import javax.persistence.*;
 public class Contrato implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="contratoKey")
+    @SequenceGenerator(name="contratoKey", allocationSize=1)
     private Long id;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date emissao;

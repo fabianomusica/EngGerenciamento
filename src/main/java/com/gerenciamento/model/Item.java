@@ -16,7 +16,8 @@ public class Item implements Serializable {
     
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="itemKey")
+    @SequenceGenerator(name="itemKey", allocationSize=1)
     private Long id;
     
     @ManyToOne
