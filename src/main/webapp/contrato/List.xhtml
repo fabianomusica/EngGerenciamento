@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      >
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Contratos" action="#{contratoController.prepareList}" ajax="false" />
+                    <p:menuitem value="Listar contrato" url="#" ajax="false" />
+                </p:breadCrumb>           
+            </h:form>
+            
+            <h:outputText value="#{bundle.ListContratoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <div class="conteudo">
+                <h:form styleClass="jsfcrud_list_form">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListContratoEmpty}" rendered="#{contratoController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{contratoController.items.rowCount > 0}">
+                        <h:outputText value="#{contratoController.pagination.pageFirstItem + 1}..#{contratoController.pagination.pageLastItem + 1}/#{contratoController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{contratoController.previous}" value="#{bundle.Previous} #{contratoController.pagination.pageSize}" rendered="#{contratoController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{contratoController.next}" value="#{bundle.Next} #{contratoController.pagination.pageSize}" rendered="#{contratoController.pagination.hasNextPage}"/>&nbsp;
+                        <p:dataTable value="#{contratoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListContratoTitle_id}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListContratoTitle_cliente}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.cliente}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListContratoTitle_emissao}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.emissao}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListContratoTitle_total}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.total}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="&nbsp;"/>
+                                </f:facet>                                
+                                <p:commandButton action="#{contratoController.prepareEdit}" title="#{bundle.ListContratoEditLink}" image="ui-icon-pencil" styleClass="gridButton" ajax="false"/>                               
+                                <p:commandButton action="#{contratoController.destroy}" title="#{bundle.ListContratoDestroyLink}" image="ui-icon-trash" styleClass="gridButton" ajax="false"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGroup>
+                    <hr></hr>
+                    <div style="float:right">
+                        <p:commandButton action="#{contratoController.prepareCreate}" value="#{bundle.ListContratoCreateLink}" ajax="false"/>                
+                    </div>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

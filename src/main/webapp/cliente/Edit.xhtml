@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        
+        <ui:define name="title">
+            <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Clientes" action="#{clienteController.prepareList}" ajax="false" />
+                    <p:menuitem value="Editar Cliente" url="#" ajax="false" />
+                </p:breadCrumb>            
+
+            </h:form>
+            <h:outputText style="margin-left: 20px;" value="#{bundle.EditClienteTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            
+            <h:form>
+                <h:panelGrid columns="2" style="margin-left: 20px;">
+                    <h:outputLabel value="#{bundle.EditClienteLabel_nome}" for="nome" />
+                    <h:inputText id="nome" value="#{clienteController.selected.nome}" title="#{bundle.EditClienteTitle_nome}" />
+                    
+                    <h:outputLabel value="#{bundle.EditClienteLabel_endereco}" for="endereco" />
+                    <h:inputText id="endereco" value="#{clienteController.selected.endereco}" title="#{bundle.EditClienteTitle_endereco}" />
+                   
+                    <h:outputLabel value="#{bundle.EditClienteLabel_cidade}" for="cidade" />
+                    <h:inputText id="cidade" value="#{clienteController.selected.cidade}" title="#{bundle.EditClienteTitle_cidade}" />                    
+                    
+                    <h:outputLabel value="#{bundle.EditClienteLabel_fone}" for="fone" />
+                    <h:inputText id="fone" value="#{clienteController.selected.fone}" title="#{bundle.EditClienteTitle_fone}" />
+                </h:panelGrid>
+                <hr/>
+                <div style="float:right;">
+                    <p:commandButton action="#{clienteController.update}" value="#{bundle.EditClienteSaveLink}" ajax="false" image="ui-icon-check"/>
+                    <p:commandButton action="#{clienteController.prepareList}" value="#{bundle.EditClienteShowAllLink}" immediate="true" ajax="false" image="ui-icon-arrowreturnthick-1-w"/>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

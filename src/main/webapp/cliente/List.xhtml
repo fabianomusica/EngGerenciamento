@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Clientes" action="#{clienteController.prepareList}" ajax="false" />
+                    <p:menuitem value="Editar Cliente" url="#" ajax="false" />
+                </p:breadCrumb>            
+
+            </h:form>
+            
+            <h:outputText value="#{bundle.ListClienteTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <div class="conteudo">
+                <h:form styleClass="jsfcrud_list_form">
+                   
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListClienteEmpty}" rendered="#{clienteController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{clienteController.items.rowCount > 0}">
+                        <h:outputText value="#{clienteController.pagination.pageFirstItem + 1}..#{clienteController.pagination.pageLastItem + 1}/#{clienteController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{clienteController.previous}" value="#{bundle.Previous} #{clienteController.pagination.pageSize}" rendered="#{clienteController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{clienteController.next}" value="#{bundle.Next} #{clienteController.pagination.pageSize}" rendered="#{clienteController.pagination.hasNextPage}"/>&nbsp;
+                        <p:dataTable value="#{clienteController.items}" var="item" >
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListClienteTitle_id}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListClienteTitle_nome}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nome}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListClienteTitle_endereco}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.endereco}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListClienteTitle_cidade}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.cidade}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListClienteTitle_fone}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fone}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="&nbsp;"/>
+                                </f:facet>
+                                <p:commandButton action="#{clienteController.prepareEdit}" title="#{bundle.ListClienteEditLink}" image="ui-icon-pencil" styleClass="gridButton" ajax="false"/>
+                                <h:outputText value=" "/>
+                                <p:commandButton action="#{clienteController.destroy}" title="#{bundle.ListClienteDestroyLink}" image="ui-icon-trash" styleClass="gridButton" ajax="false"/>
+                            </p:column>
+
+
+
+                        </p:dataTable>
+                    </h:panelGroup>
+                    <br />
+                    <div style="float: right">
+                        <p:commandButton action="#{clienteController.prepareCreate}" value="#{bundle.ListClienteCreateLink}" image="ui-icon-document" ajax="false"/>
+                    </div>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

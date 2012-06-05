@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+             <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Contratos" action="#{bundle.ListContratoLabel_contrato}" ajax="false" />
+                    <p:menuitem value="Criar novo contrato" url="#" ajax="false" />
+                </p:breadCrumb>           
+            </h:form>
+                        
+            <h:outputText value="#{bundle.CreateContratoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <p:panel>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.CreateContratoLabel_id}" for="id" />
+                        <h:inputText id="id" value="#{contratoController.selected.id}" title="#{bundle.CreateContratoTitle_id}" />
+                        <h:outputLabel value="#{bundle.CreateContratoLabel_cliente}" for="cliente" />
+                        <h:selectOneMenu id="cliente" value="#{contratoController.selected.cliente}" title="#{bundle.CreateContratoTitle_cliente}" >
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{bundle.CreateContratoLabel_emissao}" for="emissao" />
+                        
+                        <p:calendar id="emissaoCal" value="#{contratoController.selected.emissao}" showOn="button"/>
+                        <h:outputLabel value="#{bundle.CreateContratoLabel_total}" for="total" />
+                        <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.CreateContratoTitle_total}" readonly="true" />
+                    </h:panelGrid>
+                </p:panel>    
+                                
+                <div style="float: right">
+                    <p:commandButton action="#{contratoController.create}" value="#{bundle.CreateContratoSaveLink}" ajax="false" />
+                    <p:commandButton action="#{contratoController.prepareList}" value="#{bundle.CreateContratoShowAllLink}" immediate="true" ajax="false"/>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

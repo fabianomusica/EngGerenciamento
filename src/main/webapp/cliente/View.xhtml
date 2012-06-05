@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewClienteTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewClienteLabel_id}"/>
+                    <h:outputText value="#{clienteController.selected.id}" title="#{bundle.ViewClienteTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewClienteLabel_cidade}"/>
+                    <h:outputText value="#{clienteController.selected.cidade}" title="#{bundle.ViewClienteTitle_cidade}"/>
+                    <h:outputText value="#{bundle.ViewClienteLabel_endereco}"/>
+                    <h:outputText value="#{clienteController.selected.endereco}" title="#{bundle.ViewClienteTitle_endereco}"/>
+                    <h:outputText value="#{bundle.ViewClienteLabel_nome}"/>
+                    <h:outputText value="#{clienteController.selected.nome}" title="#{bundle.ViewClienteTitle_nome}"/>
+                    <h:outputText value="#{bundle.ViewClienteLabel_telefone}"/>
+                    <h:outputText value="#{clienteController.selected.telefone}" title="#{bundle.ViewClienteTitle_telefone}"/>
+                </h:panelGrid>
+                
+                <p:commandLink action="#{clienteController.destroyAndView}" value="#{bundle.ViewClienteDestroyLink}" ajax="false"/>               
+                <p:commandLink action="Edit" value="#{bundle.ViewClienteEditLink}" ajax="false"/>                
+                <p:commandLink action="#{clienteController.prepareCreate}" value="#{bundle.ViewClienteCreateLink}" ajax="false"/>               
+                <p:commandLink action="#{clienteController.prepareList}" value="#{bundle.ViewClienteShowAllLink}" ajax="false"/>               
+                <p:commandLink value="#{bundle.ViewClienteIndexLink}" action="/index" immediate="true" ajax="false" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

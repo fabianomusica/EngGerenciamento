@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewContratoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewContratoLabel_id}"/>
+                    <h:outputText value="#{contratoController.selected.id}" title="#{bundle.ViewContratoTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewContratoLabel_cliente}"/>
+                    <h:outputText value="#{contratoController.selected.cliente}" title="#{bundle.ViewContratoTitle_cliente}"/>
+                    <h:outputText value="#{bundle.ViewContratoLabel_emissao}"/>
+                    <h:outputText value="#{contratoController.selected.emissao}" title="#{bundle.ViewContratoTitle_emissao}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewContratoLabel_total}"/>
+                    <h:outputText value="#{contratoController.selected.total}" title="#{bundle.ViewContratoTitle_total}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{contratoController.destroyAndView}" value="#{bundle.ViewContratoDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewContratoEditLink}"/>
+                <br />
+                <h:commandLink action="#{contratoController.prepareCreate}" value="#{bundle.ViewContratoCreateLink}" />
+                <br />
+                <h:commandLink action="#{contratoController.prepareList}" value="#{bundle.ViewContratoShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewContratoIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
