@@ -12,7 +12,7 @@
                 <p:breadCrumb styleClass="breadCrumb">
                     <p:menuitem value="Home" action="/index" ajax="false"/>
                     <p:menuitem value="Clientes" action="#{clienteController.prepareList}" ajax="false" />
-                    <p:menuitem value="Editar Cliente" url="#" ajax="false" />
+                    <p:menuitem value="Listar clientes" url="#" ajax="false" />
                 </p:breadCrumb>            
 
             </h:form>
@@ -78,8 +78,8 @@
                         </p:dataTable>
                     </h:panelGroup>
                     <br />
-                    <div style="float: right">
-                        <p:commandButton action="#{clienteController.prepareCreate}" value="#{bundle.ListClienteCreateLink}" image="ui-icon-document" ajax="false"/>
+                    <div style="float: right; margin-left: 5px; margin-top: 5px">
+                        <p:commandButton action="#{clienteController.prepareCreate}" value="#{bundle.ListClienteCreateLink}" image="ui-icon-document" ajax="false" title="Inserir novo cliente"/>
                     </div>
                 </h:form>
             </div>
