@@ -3,10 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
+             <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Produtos" action="#{produtoController.prepareList}" ajax="false" />
+                    <p:menuitem value="Listar produtos" url="#" ajax="false" />
+                </p:breadCrumb>            
+
+            </h:form>
+            
             <h:outputText value="#{bundle.ListProdutoTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
@@ -19,42 +29,40 @@
                     <h:outputText value="#{produtoController.pagination.pageFirstItem + 1}..#{produtoController.pagination.pageLastItem + 1}/#{produtoController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{produtoController.previous}" value="#{bundle.Previous} #{produtoController.pagination.pageSize}" rendered="#{produtoController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{produtoController.next}" value="#{bundle.Next} #{produtoController.pagination.pageSize}" rendered="#{produtoController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{produtoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
+                    <p:dataTable value="#{produtoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProdutoTitle_descricao}"/>
                             </f:facet>
                             <h:outputText value="#{item.descricao}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProdutoTitle_estoque}"/>
                             </f:facet>
                             <h:outputText value="#{item.estoque}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProdutoTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{produtoController.prepareView}" value="#{bundle.ListProdutoViewLink}"/>
+                            
+                            <p:commandButton action="#{produtoController.prepareEdit}" title="#{bundle.ListProdutoEditLink}" image="ui-icon-pencil" styleClass="gridButton" ajax="false"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{produtoController.prepareEdit}" value="#{bundle.ListProdutoEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{produtoController.destroy}" value="#{bundle.ListProdutoDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
+                            <p:commandButton action="#{produtoController.destroy}" title="#{bundle.ListProdutoDestroyLink}" image="ui-icon-trash" styleClass="gridButton" ajax="false"/>
+                        </p:column>
+                    </p:dataTable>
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{produtoController.prepareCreate}" value="#{bundle.ListProdutoCreateLink}"/>
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.ListProdutoIndexLink}" action="/index" immediate="true" />
+                
+                <div style="float: right; margin-left: 5px; margin-top: 5px">
+                    <p:commandButton action="#{produtoController.prepareCreate}" value="#{bundle.ListProdutoCreateLink}" ajax="false" title="Inserir novo produto" image="ui-icon-document"/>               
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -8,28 +8,39 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
+             <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Produtos" action="#{produtoController.prepareList}" ajax="false" />
+                    <p:menuitem value="Novo produto" url="#" ajax="false" />
+                </p:breadCrumb>
+            </h:form> 
+            
             <h:outputText value="#{bundle.CreateProdutoTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">                   
-                    <h:outputLabel value="#{bundle.CreateProdutoLabel_estoque}" for="estoque" />
-                    <h:inputText id="estoque" value="#{produtoController.selected.estoque}" title="#{bundle.CreateProdutoTitle_estoque}"/>
-                    <h:outputLabel value="#{bundle.CreateProdutoLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{produtoController.selected.id}" title="#{bundle.CreateProdutoTitle_id}" />
-                </h:panelGrid>
-                <br />
-                <p:commandLink action="#{produtoController.create}" value="#{bundle.CreateProdutoSaveLink}" ajax="false" />
-                <br />
-                <br />
-                <p:commandLink action="#{produtoController.prepareList}" value="#{bundle.CreateProdutoShowAllLink}" immediate="true" ajax="false"/>
-                <br />
-                <br />
-                <p:commandLink value="#{bundle.CreateProdutoIndexLink}" action="/index" immediate="true" ajax="false" />
-            </h:form>
+            <div class="conteudo">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form>
+                    <p:panel header="Novo Produto">
+                        <h:panelGrid columns="2">                   
+                            <h:outputLabel value="#{bundle.CreateProdutoLabel_estoque}" for="estoque" />
+                            <h:inputText id="estoque" value="#{produtoController.selected.estoque}" title="#{bundle.CreateProdutoTitle_estoque}"/>
+                            
+                            <h:outputLabel value="#{bundle.CreateProdutoLabel_id}" for="id" />
+                            <h:inputText id="id" value="#{produtoController.selected.id}" title="#{bundle.CreateProdutoTitle_id}" />
+                        </h:panelGrid>
+                      
+                    </p:panel>
+                    <div style="float: right">
+                        <p:commandButton action="#{produtoController.create}" title="Salvar produto" value="#{bundle.CreateProdutoSaveLink}" image="ui-icon-check" ajax="false"/>                
+                        <p:commandButton action="#{produtoController.prepareList}" title="Listar produtos" value="#{bundle.CreateProdutoShowAllLink}" immediate="true" image="ui-icon-arrowreturnthick-1-w" ajax="false"/>                
+                        
+                    </div>
+                </h:form>
+            </div>    
         </ui:define>
     </ui:composition>
 

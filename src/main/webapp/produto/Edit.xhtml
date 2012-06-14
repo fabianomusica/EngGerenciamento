@@ -3,10 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
+             <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Produtos" action="#{produtoController.prepareList}" ajax="false" />
+                    <p:menuitem value="Editar produto" url="#" ajax="false" />
+                </p:breadCrumb> 
+            </h:form>
+            
             <h:outputText value="#{bundle.EditProdutoTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
@@ -14,21 +23,18 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
+                <h:panelGrid columns="2" style="margin-left: 20px;">
                     <h:outputLabel value="#{bundle.EditProdutoLabel_estoque}" for="estoque" />
                     <h:inputText id="estoque" value="#{produtoController.selected.estoque}" title="#{bundle.EditProdutoTitle_estoque}" />
                     <h:outputLabel value="#{bundle.EditProdutoLabel_id}" for="id" />
                     <h:inputText id="id" value="#{produtoController.selected.id}" title="#{bundle.EditProdutoTitle_id}" />
                 </h:panelGrid>
-                <h:commandLink action="#{produtoController.update}" value="#{bundle.EditProdutoSaveLink}"/>
-                <br />
-                <br />
-                <h:commandLink action="View" value="#{bundle.EditProdutoViewLink}" immediate="true"/>
-                <br />
-                <h:commandLink action="#{produtoController.prepareList}" value="#{bundle.EditProdutoShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.EditProdutoIndexLink}" action="/index" immediate="true" />
+                
+                <hr/>
+                <div style="float:right;margin-left: 5px;margin-top: 5px">
+                    <p:commandButton action="#{produtoController.update}" value="#{bundle.EditProdutoSaveLink}" title="Salvar alteração" image="ui-icon-check" ajax="false"/> 
+                    <p:commandButton action="#{produtoController.prepareList}" value="#{bundle.EditProdutoShowAllLink}" immediate="true" title="Listar produtos" ajax="false" image="ui-icon-arrowreturnthick-1-w"/>                
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>
