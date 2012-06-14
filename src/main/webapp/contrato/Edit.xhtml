@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:composition template="/template.xhtml">
@@ -28,15 +29,10 @@
                     <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.EditContratoTitle_total}" readonly="true"/>
                     
                 </h:panelGrid>
-                <h:commandLink action="#{contratoController.update}" value="#{bundle.EditContratoSaveLink}"/>
-                <br />
-                <br />
-                <h:commandLink action="View" value="#{bundle.EditContratoViewLink}" immediate="true"/>
-                <br />
-                <h:commandLink action="#{contratoController.prepareList}" value="#{bundle.EditContratoShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.EditContratoIndexLink}" action="/index" immediate="true" />
+                <p:commandLink action="#{contratoController.update}" value="#{bundle.EditContratoSaveLink}" ajax="false"/>               
+                <p:commandLink action="View" value="#{bundle.EditContratoViewLink}" immediate="true" ajax="false"/>               
+                <p:commandLink action="#{contratoController.prepareList}" value="#{bundle.EditContratoShowAllLink}" immediate="true" ajax="false"/>               
+                <p:commandLink value="#{bundle.EditContratoIndexLink}" action="/index" immediate="true" ajax="false"/>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -27,6 +27,7 @@
                     <h:panelGrid columns="2">
                         <h:outputLabel value="#{bundle.CreateContratoLabel_id}" for="id" />
                         <h:inputText id="id" value="#{contratoController.selected.id}" title="#{bundle.CreateContratoTitle_id}" />
+                        
                         <h:outputLabel value="#{bundle.CreateContratoLabel_cliente}" for="cliente" />
                         <h:selectOneMenu id="cliente" value="#{contratoController.selected.cliente}" title="#{bundle.CreateContratoTitle_cliente}" >
                             <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>
@@ -35,14 +36,16 @@
                         
                         <p:calendar id="emissaoCal" value="#{contratoController.selected.emissao}" showOn="button"/>
                         <h:outputLabel value="#{bundle.CreateContratoLabel_total}" for="total" />
-                        <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.CreateContratoTitle_total}" readonly="true" />
+                        <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.CreateContratoTitle_total}"/>
                     </h:panelGrid>
                 </p:panel>    
                                 
-                <div style="float: right">
-                    <p:commandButton action="#{contratoController.create}" value="#{bundle.CreateContratoSaveLink}" ajax="false" />
-                    <p:commandButton action="#{contratoController.prepareList}" value="#{bundle.CreateContratoShowAllLink}" immediate="true" ajax="false"/>
+                <div style="float: right;margin-right: 5px;margin-top: 5px;">
+                    <p:commandButton action="/index" value="Cancelar" ajax="false" />&nbsp;
+                    <p:commandButton action="#{contratoController.create}" value="#{bundle.CreateContratoSaveLink}" ajax="false" />&nbsp;
+                    <p:commandButton action="#{contratoController.prepareList}" value="#{bundle.CreateContratoShowAllLink}" immediate="true" ajax="false"/>&nbsp;
                 </div>
+                
             </h:form>
         </ui:define>
     </ui:composition>
