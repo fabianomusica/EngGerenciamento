@@ -26,16 +26,16 @@ public class Cliente implements Serializable {
     private String endereco;
     private String cidade;
     private String fone;
-    private int cpf;
-    private int rg;
+    private String cpf;
+    private String rg;
     private String email;
     private char sexo;
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -47,11 +47,11 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-    public int getRg() {
+    public String getRg() {
         return rg;
     }
 
-    public void setRg(int rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
 

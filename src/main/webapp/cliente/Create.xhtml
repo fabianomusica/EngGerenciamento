@@ -37,6 +37,21 @@
                         
                         <h:outputLabel value="#{bundle.CreateClienteLabel_fone}" for="fone" />
                         <h:inputText id="fone" value="#{clienteController.selected.fone}" title="#{bundle.CreateClienteTitle_fone}" />
+                        
+                        <h:outputLabel value="#{bundle.CreateClienteLabel_email}" for="email" />
+                        <h:inputText id="email" value="#{clienteController.selected.email}" title="#{bundle.CreateClienteTitle_email}" />
+                        
+                        <h:outputLabel value="#{bundle.CreateClienteLabel_rg}" for="rg" />
+                        <h:inputText id="rg" value="#{clienteController.selected.rg}" title="#{bundle.CreateClienteTitle_rg}" />
+                        
+                        <h:outputLabel value="#{bundle.CreateClienteLabel_cpf}" for="cpf" />
+                        <h:inputText id="cpf" value="#{clienteController.selected.cpf}" title="#{bundle.CreateClienteTitle_cpf}" />
+                        
+                        <h:outputLabel value="#{bundle.CreateClienteLabel_sexo}" for="sexo" />
+                        <h:selectOneRadio id="sexo" value="#{clienteController.selected.sexo}">
+                            <f:selectItem itemValue="M" itemLabel="Masculino" />
+                            <f:selectItem itemValue="F" itemLabel="Femenino" />
+                        </h:selectOneRadio>
 
                     </h:panelGrid>
                 </p:panel>
