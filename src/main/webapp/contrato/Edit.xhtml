@@ -31,6 +31,10 @@
                     <h:inputText id="emissao" value="#{contratoController.selected.emissao}" title="#{bundle.EditContratoTitle_emissao}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
+                    
+                     <h:outputLabel value="#{bundle.EditContratoTitle_descricao}" for="descricao"/>
+                        <h:inputText id="descricao" value="#{contratoController.selected.descricao}" size="35" />
+                    
                     <h:outputLabel value="#{bundle.EditContratoLabel_total}" for="total" />
                     <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.EditContratoTitle_total}" readonly="true"/>
                     

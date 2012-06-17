@@ -5,6 +5,7 @@
 package com.gerenciamento.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.*;
 
 /**
@@ -26,9 +27,9 @@ public class Item implements Serializable {
     @ManyToOne
     private Produto produto;
     
-    private double quantidade;
+    private BigDecimal quantidade = new BigDecimal("0.0");
     
-    private double valorUnitario;
+    private BigDecimal valorUnitario = new BigDecimal("0.0");
     
 
     public Long getId() {
@@ -55,19 +56,19 @@ public class Item implements Serializable {
         this.produto = produto;
     }
 
-    public double getQuantidade() {
+    public BigDecimal getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(double quantidade) {
+    public void setQuantidade(BigDecimal quantidade) {
         this.quantidade = quantidade;
     }
 
-    public double getValorUnitario() {
+    public BigDecimal getValorUnitario() {
         return valorUnitario;
     }
 
-    public void setValorUnitario(double valorUnitario) {
+    public void setValorUnitario(BigDecimal valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 

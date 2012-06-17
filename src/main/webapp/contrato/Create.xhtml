@@ -33,6 +33,10 @@
                         <h:outputLabel value="#{bundle.CreateContratoLabel_emissao}" for="emissao" />
                         
                         <p:calendar id="emissaoCal" value="#{contratoController.selected.emissao}" showOn="button"/>
+                              
+                        <h:outputLabel value="#{bundle.CreateContratoTitle_descricao}" for="descricao"/>
+                        <h:inputText id="descricao" value="#{contratoController.selected.descricao}" size="35" />
+                          
                         <h:outputLabel value="#{bundle.CreateContratoLabel_total}" for="total" />
                         <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.CreateContratoTitle_total}" readonly="true" />
                     </h:panelGrid>
