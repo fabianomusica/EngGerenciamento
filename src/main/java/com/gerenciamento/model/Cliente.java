@@ -29,7 +29,7 @@ public class Cliente implements Serializable {
     private String cpf;
     private String rg;
     private String email;
-    private char sexo;
+    private char sexo = 'M';
 
     public String getCpf() {
         return cpf;
