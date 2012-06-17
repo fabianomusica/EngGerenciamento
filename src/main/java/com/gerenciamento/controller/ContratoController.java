@@ -3,6 +3,7 @@ package com.gerenciamento.controller;
 import com.gerenciamento.model.Contrato;
 import com.gerenciamento.controller.util.JsfUtil;
 import com.gerenciamento.controller.util.PaginationHelper;
+import com.gerenciamento.model.Item;
 import com.gerenciamento.service.ContratoFacade;
 
 import java.io.Serializable;
@@ -28,10 +29,19 @@ public class ContratoController implements Serializable {
     private com.gerenciamento.service.ContratoFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private Item item;
 
     public ContratoController() {
     }
 
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+    
     public Contrato getSelected() {
         if (current == null) {
             current = new Contrato();
@@ -223,5 +233,23 @@ public class ContratoController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + ContratoController.class.getName());
             }
         }
+    }
+    
+    public void prepareCreateItem(){
+        this.item =  new Item();
+    }
+    
+    public void createItem(){
+        if(this.item != null && this.item.getContrato() == null){
+            this.current.addItem(item);
+        }
+    }
+    
+    public void prepareEditItem(Item item){
+        this.item = item;
+    }
+    
+    public void removeItem(Item item){
+        current.removeItem(item);
     }
 }

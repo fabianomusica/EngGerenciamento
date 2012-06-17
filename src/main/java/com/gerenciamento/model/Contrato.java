@@ -97,7 +97,7 @@ public class Contrato implements Serializable {
         return "com.gerenciamento.model.Contrato[ id=" + id + " ]";
     }
     
-    private void addItem(Item item){
+    public void addItem(Item item){
         if(!itens.contains(item)){
             item.setContrato(this);
             itens.add(item);
@@ -105,7 +105,7 @@ public class Contrato implements Serializable {
             
     }
     
-    private void removeItem(Item item){
+    public void removeItem(Item item){
         if(itens.contains(item)){
             item.setContrato(null);
             itens.remove(item);

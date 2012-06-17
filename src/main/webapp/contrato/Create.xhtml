@@ -23,6 +23,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
+                <!-- Painel do Contrato-->
                 <p:panel>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="#{bundle.CreateContratoLabel_id}" for="id" />
@@ -38,14 +39,79 @@
                         <h:outputLabel value="#{bundle.CreateContratoLabel_total}" for="total" />
                         <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.CreateContratoTitle_total}"/>
                     </h:panelGrid>
-                </p:panel>    
-                                
-                <div style="float: right;margin-right: 5px;margin-top: 5px;">
-                    <p:commandButton action="/index" value="Cancelar" ajax="false" />&nbsp;
-                    <p:commandButton action="#{contratoController.create}" value="#{bundle.CreateContratoSaveLink}" ajax="false" />&nbsp;
-                    <p:commandButton action="#{contratoController.prepareList}" value="#{bundle.CreateContratoShowAllLink}" immediate="true" ajax="false"/>&nbsp;
+                </p:panel>
+                
+                <!-- Painel dos Itens -->
+                <p:panel>
+                    <p:dataTable value="#{contratoController.selected.itens}" var="item" id="itensTable">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemTitle_contrato}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.contrato}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemTitle_produto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemTitle_quantidade}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quantidade}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemTitle_valorUnitario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valorUnitario}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{contratoController.prepareEditItem(item)}" value="#{bundle.ListItemEditLink}"/>
+                            <h:commandLink action="#{contratoController.destroyItem(item)}" value="#{bundle.ListItemDestroyLink}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <h:panelGroup style="text-align: right">
+                                <p:commandButton id="novoItemtButton" actionListener="#{contratoController.prepareCreateItem}" update="itemDlg" oncomplete="itemDialog.show();" image="ui-icon-check" value="Novo Item"/>  
+                            </h:panelGroup>                        
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+                
+                <div style="float:right">
+                    <p:commandButton action="#{contratoController.create}" value="#{bundle.CreateContratoSaveLink}" ajax="false" image="ui-icon-check"/>
+                    <p:commandButton id="showAllButton" action="#{contratoController.prepareList}" value="#{bundle.CreateContratoShowAllLink}" immediate="true" ajax="false" image="ui-icon-arrowreturnthick-1-w" title="Mostrar todos os contratos" />
+                    <p:commandButton value="#{bundle.CreateContratoIndexLink}" action="/index" immediate="true" ajax="false" image="ui-icon-home"/>
                 </div>
                 
+                <p:dialog header="Item do Contrato" widgetVar="itemDialog" resizable="false" id="itemDlg"  showEffect="fade" hideEffect="explode" modal="true">  
+                    <p:messages />
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.CreateItemLabel_produto}" for="produto" />
+                        <h:selectOneMenu id="produto" value="#{contratoController.item.produto}" title="#{bundle.CreateItemTitle_produto}" >
+                            <f:selectItems value="#{produtoController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{bundle.CreateItemLabel_quantidade}" for="quantidade" />
+                        <h:inputText id="quantidade" value="#{contratoController.item.quantidade}" title="#{bundle.CreateItemTitle_quantidade}" />
+                        <h:outputLabel value="#{bundle.CreateItemLabel_valorUnitario}" for="valorUnitario" />
+                        <h:inputText id="valorUnitario" value="#{contratoController.item.valorUnitario}" title="#{bundle.CreateItemTitle_valorUnitario}" />
+                        <f:facet name="footer"> 
+                            <p:commandButton value="Gravar Item" actionListener="#{contratoController.createItem}" update="itemDlg, itensTable" image="ui-icon-check" process="itemDlg" />
+                            <p:commandButton value="Fechar" oncomplete="itemDialog.hide();" image="ui-icon-close" />
+                        </f:facet>
+                    </h:panelGrid>                    
+                </p:dialog>                        
             </h:form>
         </ui:define>
     </ui:composition>
