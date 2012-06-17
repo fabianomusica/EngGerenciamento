@@ -5,11 +5,9 @@
 package com.gerenciamento.model;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import java.math.BigDecimal;
+import java.util.Date;
+import javax.persistence.*;
 
 /**
  *
@@ -23,8 +21,27 @@ public class Produto implements Serializable {
     @SequenceGenerator(name="produtoKey", allocationSize=1)
     private Long id;
     private String descricao;
-    private double estoque;
+    private double estoque;    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dtInclusao = new Date();
+    private BigDecimal valor;
 
+    public Date getDtInclusao() {
+        return dtInclusao;
+    }
+
+    public void setDtInclusao(Date dtInclusao) {
+        this.dtInclusao = dtInclusao;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+        
     public String getDescricao() {
         return descricao;
     }

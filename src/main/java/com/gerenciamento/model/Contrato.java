@@ -32,6 +32,16 @@ public class Contrato implements Serializable {
     @OneToMany(mappedBy = "contrato")
     private List<Item>itens = new ArrayList<Item>();
 
+    private String descricao;
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
     public Contrato() {
         this.emissao = new Date();
     }

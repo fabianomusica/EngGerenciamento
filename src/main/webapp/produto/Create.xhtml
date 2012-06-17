@@ -34,6 +34,14 @@
                             
                             <h:outputLabel value="#{bundle.CreateProdutoLabel_estoque}" for="estoque" />
                             <h:inputText id="estoque" value="#{produtoController.selected.estoque}" title="#{bundle.CreateProdutoTitle_estoque}"/>
+                            
+                            <h:outputLabel value="#{bundle.CreateProdutoLabel_dtInclusao}" for="dtInclusao" />
+                            <p:calendar id="dtInclusao" value="#{produtoController.selected.dtInclusao}" title="#{bundle.CreateProdutoTitle_dtInclusao}" showOn="button"/>
+                            
+                             <h:outputLabel value="#{bundle.CreateProdutoLabel_valor}" for="valor" />
+                            <h:inputText id="valor" value="#{produtoController.selected.valor}" title="#{bundle.CreateProdutoTitle_valor}">
+                               <f:converter converterId="javax.faces.BigDecimal"/>
+                            </h:inputText>    
                         </h:panelGrid>
                       
                     </p:panel>

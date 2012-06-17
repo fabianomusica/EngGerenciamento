@@ -26,7 +26,43 @@ public class Cliente implements Serializable {
     private String endereco;
     private String cidade;
     private String fone;
+    private int cpf;
+    private int rg;
+    private String email;
+    private char sexo;
 
+    public int getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getRg() {
+        return rg;
+    }
+
+    public void setRg(int rg) {
+        this.rg = rg;
+    }
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
+    }
+    
     public String getFone() {
         return fone;
     }
