@@ -38,16 +38,27 @@
                             <h:outputText value="#{bundle.ViewClienteLabel_cidade}"/>
                             <h:outputText value="#{clienteController.selected.cidade}" title="#{bundle.ViewClienteTitle_cidade}"/>
 
-                            <h:outputText value="#{bundle.ListClienteTitle_fone}"/>
+                            <h:outputText value="#{bundle.ViewClienteLabel_fone}"/>
                             <h:outputText value="#{clienteController.selected.fone}" title="#{bundle.ViewClienteTitle_fone}"/>
+                            
+                            <h:outputText value="#{bundle.ViewClienteTitle_rg}"/>
+                            <h:outputText value="#{clienteController.selected.rg}" title="#{bundle.ViewClienteTitle_rg}"/>
+                            
+                            <h:outputText value="#{bundle.ViewClienteTitle_cpf}"/>
+                            <h:outputText value="#{clienteController.selected.cpf}" title="#{bundle.ViewClienteTitle_cpf}"/>
+                            
+                            <h:outputText value="#{bundle.ViewClienteTitle_sexo}"/>
+                            <h:outputText value="#{clienteController.selected.sexo}" title="#{bundle.ViewClienteTitle_sexo}"/>
+                            
+                            
 
                         </h:panelGrid>
                     </p:panel>
                     
                     <div style="float: right;margin-left: 5px;margin-top: 5px">
-                        <p:commandButton action="#{clienteController.destroyAndView}" value="#{bundle.ViewClienteDestroyLink}" image="ui-icon-trash" ajax="false"/>               
-                        <p:commandButton action="Edit" value="#{bundle.ViewClienteEditLink}" image="ui-icon-pencil" ajax="false"/>  
-                        <p:commandButton action="#{clienteController.prepareList}" value="#{bundle.ViewClienteShowAllLink}" image="ui-icon-arrowreturnthick-1-w" ajax="false"/>               
+                        <p:commandButton action="#{clienteController.destroyAndView}" value="#{bundle.ViewClienteDestroyLink}" title="Apagar cliente" image="ui-icon-trash" ajax="false"/>               
+                        <p:commandButton action="Edit" value="#{bundle.ViewClienteEditLink}" title="Editar cliente" image="ui-icon-pencil" ajax="false"/>  
+                        <p:commandButton action="#{clienteController.prepareList}" title="Listar todos clientes" value="#{bundle.ViewClienteShowAllLink}" image="ui-icon-arrowreturnthick-1-w" ajax="false"/>               
                     </div>
                 </h:form>
             </div>    
