@@ -32,6 +32,10 @@ public class Contrato implements Serializable {
     @OneToMany(mappedBy = "contrato")
     private List<Item>itens = new ArrayList<Item>();
 
+    public Contrato() {
+        this.emissao = new Date();
+    }
+
     public Long getId() {
         return id;
     }

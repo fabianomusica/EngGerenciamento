@@ -26,8 +26,6 @@
                 <!-- Painel do Contrato-->
                 <p:panel>
                     <h:panelGrid columns="2">
-                        <h:outputLabel value="#{bundle.CreateContratoLabel_id}" for="id" />
-                        <h:inputText id="id" value="#{contratoController.selected.id}" title="#{bundle.CreateContratoTitle_id}" />
                         <h:outputLabel value="#{bundle.CreateContratoLabel_cliente}" for="cliente" />
                         <h:selectOneMenu id="cliente" value="#{contratoController.selected.cliente}" title="#{bundle.CreateContratoTitle_cliente}" >
                             <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>

@@ -3,19 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
+             <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Contratos" action="#{bundle.ListContratoLabel_contrato}" ajax="false" />
+                    <p:menuitem value="Criar novo contrato" url="#" ajax="false" />
+                </p:breadCrumb>           
+            </h:form>
             <h:outputText value="#{bundle.EditContratoTitle}"></h:outputText>
-        </ui:define>
+        
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    
                     <h:outputLabel value="#{bundle.EditContratoLabel_cliente}" for="cliente" />
                     <h:selectOneMenu id="cliente" value="#{contratoController.selected.cliente}" title="#{bundle.EditContratoTitle_cliente}" >
                         <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>
