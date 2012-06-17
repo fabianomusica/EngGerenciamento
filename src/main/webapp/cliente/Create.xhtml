@@ -7,16 +7,15 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:composition template="/template.xhtml">
-        <ui:define name="title">
+        <ui:define name="title"> 
+            
             <h:form>
                 <p:breadCrumb styleClass="breadCrumb">
                     <p:menuitem value="Home" action="/index" ajax="false"/>
                     <p:menuitem value="Clientes" action="#{clienteController.prepareList}" ajax="false" />
                     <p:menuitem value="Editar Cliente" url="#" ajax="false" />
-                </p:breadCrumb>            
-
-            </h:form>
-            
+                </p:breadCrumb>
+            </h:form>            
             <h:outputText value="#{bundle.CreateClienteTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
@@ -42,12 +41,10 @@
                     </h:panelGrid>
                 </p:panel>
                 <div style="float:right">
-                    <p:commandButton action="#{clienteController.create}" value="#{bundle.CreateClienteSaveLink}" ajax="false" image="ui-icon-check"/>
-                    
+                    <p:commandButton action="#{clienteController.create}" value="#{bundle.CreateClienteSaveLink}" ajax="false" image="ui-icon-check" title="Salvar cliente"/>                    
                     <p:commandButton id="showAllButton" action="#{clienteController.prepareList}" value="#{bundle.CreateClienteShowAllLink}" immediate="true" ajax="false" image="ui-icon-arrowreturnthick-1-w" title="Mostrar todos os clientes" />
                     <p:tooltip for="showAllButton"  showEvent="focus" hideEvent="blur" />
-                    
-                    
+                                        
                 </div>
             </h:form>
             </div>

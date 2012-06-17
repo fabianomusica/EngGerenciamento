@@ -3,71 +3,81 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
+            <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Itens" action="#{itemController.prepareList}" ajax="false" />
+                    <p:menuitem value="Listar itens" url="#" ajax="false" />
+                </p:breadCrumb>            
+
+            </h:form>
+            
             <h:outputText value="#{bundle.ListItemTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListItemEmpty}" rendered="#{itemController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{itemController.items.rowCount > 0}">
-                    <h:outputText value="#{itemController.pagination.pageFirstItem + 1}..#{itemController.pagination.pageLastItem + 1}/#{itemController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{itemController.previous}" value="#{bundle.Previous} #{itemController.pagination.pageSize}" rendered="#{itemController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{itemController.next}" value="#{bundle.Next} #{itemController.pagination.pageSize}" rendered="#{itemController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{itemController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListItemTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListItemTitle_contrato}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.contrato}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListItemTitle_produto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.produto}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListItemTitle_quantidade}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.quantidade}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListItemTitle_valorUnitario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.valorUnitario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{itemController.prepareView}" value="#{bundle.ListItemViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{itemController.prepareEdit}" value="#{bundle.ListItemEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{itemController.destroy}" value="#{bundle.ListItemDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{itemController.prepareCreate}" value="#{bundle.ListItemCreateLink}"/>
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.ListItemIndexLink}" action="/index" immediate="true" />
-            </h:form>
+             <div class="conteudo">
+                <h:form styleClass="jsfcrud_list_form">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListItemEmpty}" rendered="#{itemController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{itemController.items.rowCount > 0}">
+                        <h:outputText value="#{itemController.pagination.pageFirstItem + 1}..#{itemController.pagination.pageLastItem + 1}/#{itemController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{itemController.previous}" value="#{bundle.Previous} #{itemController.pagination.pageSize}" rendered="#{itemController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{itemController.next}" value="#{bundle.Next} #{itemController.pagination.pageSize}" rendered="#{itemController.pagination.hasNextPage}"/>&nbsp;
+                        <p:dataTable value="#{itemController.items}" var="item"  >
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListItemTitle_id}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListItemTitle_contrato}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.contrato}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListItemTitle_produto}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.produto}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListItemTitle_quantidade}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.quantidade}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListItemTitle_valorUnitario}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.valorUnitario}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="&nbsp;"/>
+                                </f:facet>
+
+                                <p:commandButton action="#{itemController.prepareEdit}" title="#{bundle.ListItemEditLink}" image="ui-icon-pencil" styleClass="gridButton" ajax="false"/>
+                                <h:outputText value=" "/>
+                                <p:commandButton action="#{itemController.destroy}" title="#{bundle.ListItemDestroyLink}" image="ui-icon-trash" styleClass="gridButton" ajax="false"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGroup>
+
+                    <div style="float: right; margin-left: 5px; margin-top: 5px">
+                        <p:commandButton action="#{itemController.prepareCreate}" title="Inserir novo item" image="ui-icon-document" value="#{bundle.ListItemCreateLink}" ajax="false"/>
+                    </div>
+                </h:form>
+            </div>     
         </ui:define>
     </ui:composition>
 

@@ -3,10 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
+            <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Contratos" action="#{contratoController.prepareList}" ajax="false" />
+                    <p:menuitem value="Listar contrato" url="#" ajax="false" />
+                </p:breadCrumb>           
+            </h:form>
+            
             <h:outputText value="#{bundle.ViewContratoTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
@@ -14,31 +23,28 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewContratoLabel_id}"/>
-                    <h:outputText value="#{contratoController.selected.id}" title="#{bundle.ViewContratoTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewContratoLabel_cliente}"/>
-                    <h:outputText value="#{contratoController.selected.cliente}" title="#{bundle.ViewContratoTitle_cliente}"/>
-                    <h:outputText value="#{bundle.ViewContratoLabel_emissao}"/>
-                    <h:outputText value="#{contratoController.selected.emissao}" title="#{bundle.ViewContratoTitle_emissao}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewContratoLabel_total}"/>
-                    <h:outputText value="#{contratoController.selected.total}" title="#{bundle.ViewContratoTitle_total}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{contratoController.destroyAndView}" value="#{bundle.ViewContratoDestroyLink}"/>
-                <br />
-                <br />
-                <h:commandLink action="Edit" value="#{bundle.ViewContratoEditLink}"/>
-                <br />
-                <h:commandLink action="#{contratoController.prepareCreate}" value="#{bundle.ViewContratoCreateLink}" />
-                <br />
-                <h:commandLink action="#{contratoController.prepareList}" value="#{bundle.ViewContratoShowAllLink}"/>
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.ViewContratoIndexLink}" action="/index" immediate="true" />
-
+                <p:panel>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="#{bundle.ViewContratoLabel_id}"/>
+                        <h:outputText value="#{contratoController.selected.id}" title="#{bundle.ViewContratoTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewContratoLabel_cliente}"/>
+                        <h:outputText value="#{contratoController.selected.cliente}" title="#{bundle.ViewContratoTitle_cliente}"/>
+                        <h:outputText value="#{bundle.ViewContratoLabel_emissao}"/>
+                        <h:outputText value="#{contratoController.selected.emissao}" title="#{bundle.ViewContratoTitle_emissao}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewContratoLabel_total}"/>
+                        <h:outputText value="#{contratoController.selected.total}" title="#{bundle.ViewContratoTitle_total}"/>
+                    </h:panelGrid>
+                </p:panel>
+                
+                <div style="float: right;margin-right: 5px;margin-top: 5px;">
+                    <p:commandButton action="#{contratoController.destroyAndView}" value="#{bundle.ViewContratoDestroyLink}" ajax="false"/>&nbsp;
+                    <p:commandButton action="Edit" value="#{bundle.ViewContratoEditLink}" ajax="false" />&nbsp;                
+                    <p:commandButton action="#{contratoController.prepareCreate}" value="#{bundle.ViewContratoCreateLink}" ajax="false" />&nbsp;               
+                    <p:commandButton action="#{contratoController.prepareList}" value="#{bundle.ViewContratoShowAllLink}" ajax="false" />&nbsp;  
+                </div>
+                
             </h:form>
         </ui:define>
     </ui:composition>

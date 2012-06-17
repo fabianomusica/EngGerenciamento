@@ -8,33 +8,49 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
+            <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Clientes" action="#{clienteController.prepareList}" ajax="false" />
+                    <p:menuitem value="Editar Cliente" url="#" ajax="false" />
+                </p:breadCrumb>            
+
+            </h:form>
+            
             <h:outputText value="#{bundle.ViewClienteTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewClienteLabel_id}"/>
-                    <h:outputText value="#{clienteController.selected.id}" title="#{bundle.ViewClienteTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewClienteLabel_cidade}"/>
-                    <h:outputText value="#{clienteController.selected.cidade}" title="#{bundle.ViewClienteTitle_cidade}"/>
-                    <h:outputText value="#{bundle.ViewClienteLabel_endereco}"/>
-                    <h:outputText value="#{clienteController.selected.endereco}" title="#{bundle.ViewClienteTitle_endereco}"/>
-                    <h:outputText value="#{bundle.ViewClienteLabel_nome}"/>
-                    <h:outputText value="#{clienteController.selected.nome}" title="#{bundle.ViewClienteTitle_nome}"/>
-                    <h:outputText value="#{bundle.ViewClienteLabel_fone}"/>
-                    <h:outputText value="#{clienteController.selected.fone}" title="#{bundle.ViewClienteTitle_fone}"/>
-                </h:panelGrid>
-                
-                <p:commandLink action="#{clienteController.destroyAndView}" value="#{bundle.ViewClienteDestroyLink}" ajax="false"/>               
-                <p:commandLink action="Edit" value="#{bundle.ViewClienteEditLink}" ajax="false"/>                
-                <p:commandLink action="#{clienteController.prepareCreate}" value="#{bundle.ViewClienteCreateLink}" ajax="false"/>               
-                <p:commandLink action="#{clienteController.prepareList}" value="#{bundle.ViewClienteShowAllLink}" ajax="false"/>               
-                <p:commandLink value="#{bundle.ViewClienteIndexLink}" action="/index" immediate="true" ajax="false" />
+            <div class="conteudo">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form>
+                   
+                    <p:panel header="Atualização de cliente">
+                        <h:panelGrid columns="2">
+                            
+                            <h:outputText value="#{bundle.ViewClienteLabel_nome}"/>
+                            <h:outputText value="#{clienteController.selected.nome}" title="#{bundle.ViewClienteTitle_nome}"/>                                                       
 
-            </h:form>
+                            <h:outputText value="#{bundle.ViewClienteLabel_endereco}"/>
+                            <h:outputText value="#{clienteController.selected.endereco}" title="#{bundle.ViewClienteTitle_endereco}"/>
+
+                            <h:outputText value="#{bundle.ViewClienteLabel_cidade}"/>
+                            <h:outputText value="#{clienteController.selected.cidade}" title="#{bundle.ViewClienteTitle_cidade}"/>
+
+                            <h:outputText value="#{bundle.ListClienteTitle_fone}"/>
+                            <h:outputText value="#{clienteController.selected.fone}" title="#{bundle.ViewClienteTitle_fone}"/>
+
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                    <div style="float: right;margin-left: 5px;margin-top: 5px">
+                        <p:commandButton action="#{clienteController.destroyAndView}" value="#{bundle.ViewClienteDestroyLink}" image="ui-icon-trash" ajax="false"/>               
+                        <p:commandButton action="Edit" value="#{bundle.ViewClienteEditLink}" image="ui-icon-pencil" ajax="false"/>  
+                        <p:commandButton action="#{clienteController.prepareList}" value="#{bundle.ViewClienteShowAllLink}" image="ui-icon-arrowreturnthick-1-w" ajax="false"/>               
+                    </div>
+                </h:form>
+            </div>    
         </ui:define>
     </ui:composition>
 
