@@ -32,6 +32,12 @@
                     <p:dataTable value="#{produtoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProdutoTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProdutoTitle_descricao}"/>
                             </f:facet>
                             <h:outputText value="#{item.descricao}"/>
@@ -41,12 +47,6 @@
                                 <h:outputText value="#{bundle.ListProdutoTitle_estoque}"/>
                             </f:facet>
                             <h:outputText value="#{item.estoque}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProdutoTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

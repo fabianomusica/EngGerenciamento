@@ -26,11 +26,14 @@
                 <h:form>
                     <p:panel header="Novo Produto">
                         <h:panelGrid columns="2">                   
+                            <h:outputLabel value="#{bundle.CreateProdutoLabel_id}" for="id" />
+                            <h:inputText id="id" value="#{produtoController.selected.id}" title="#{bundle.CreateProdutoTitle_id}" readonly="true" />
+                            
+                            <h:outputLabel value="#{bundle.CreateProdutoLabel_descricao}" for="descricao" />
+                            <h:inputText id="descricao" value="#{produtoController.selected.descricao}" title="#{bundle.CreateProdutoTitle_descricao}"/>
+                            
                             <h:outputLabel value="#{bundle.CreateProdutoLabel_estoque}" for="estoque" />
                             <h:inputText id="estoque" value="#{produtoController.selected.estoque}" title="#{bundle.CreateProdutoTitle_estoque}"/>
-                            
-                            <h:outputLabel value="#{bundle.CreateProdutoLabel_id}" for="id" />
-                            <h:inputText id="id" value="#{produtoController.selected.id}" title="#{bundle.CreateProdutoTitle_id}" />
                         </h:panelGrid>
                       
                     </p:panel>

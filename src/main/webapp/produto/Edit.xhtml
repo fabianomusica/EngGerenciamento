@@ -24,10 +24,14 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2" style="margin-left: 20px;">
+                    <h:outputLabel value="#{bundle.EditProdutoLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{produtoController.selected.id}" title="#{bundle.EditProdutoTitle_id}" readonly="true"/>
+                    
+                    <h:outputLabel value="#{bundle.EditProdutoLabel_descricao}" for="descricao" />
+                    <h:inputText id="descricao" value="#{produtoController.selected.descricao}" title="#{bundle.EditProdutoTitle_descricao}"/>
+                    
                     <h:outputLabel value="#{bundle.EditProdutoLabel_estoque}" for="estoque" />
                     <h:inputText id="estoque" value="#{produtoController.selected.estoque}" title="#{bundle.EditProdutoTitle_estoque}" />
-                    <h:outputLabel value="#{bundle.EditProdutoLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{produtoController.selected.id}" title="#{bundle.EditProdutoTitle_id}" />
                 </h:panelGrid>
                 
                 <hr/>
