@@ -11,14 +11,14 @@ body {
     height: 100%;
     font-family: Arial, Helvetica, sans-serif;
     color: #3a4f54;
-    background-color: white;
+    background-color: #222222;
     font-size: small;
-    background: -webkit-linear-gradient(white, #A9A9A9) repeat scroll 0 0 transparent;
 }
 
 .conteudo {
     position: relative;
-    background: white;    
+    background-color: white;
+    background-repeat: none;
     width: 800px;
     height: 100%;
     margin: auto;
@@ -108,7 +108,7 @@ tr.jsfcrud_even_row {
 }
 	
 #menu ul li a {        
-    background: -webkit-linear-gradient(white, #363636) repeat scroll 0 0 transparent;
+    background: -webkit-linear-gradient(white, #104E8B) repeat scroll 0 0 transparent;
     color: #FFF;
     border: 1px solid black;
     border-radius: 6px 6px 0 0;        
@@ -124,7 +124,7 @@ tr.jsfcrud_even_row {
 }
 	
 #menu ul li a:hover {
-    background: -webkit-linear-gradient(#363636, white) repeat scroll 0 0 transparent;
+    background: -webkit-linear-gradient(#104E8B, white) repeat scroll 0 0 transparent;
     color: white;
     border: 1px solid black;
     border-bottom: none;
