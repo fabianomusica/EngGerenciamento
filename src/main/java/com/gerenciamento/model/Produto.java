@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -20,11 +23,18 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator="produtoKey")
     @SequenceGenerator(name="produtoKey", allocationSize=1)
     private Long id;
+    
+    @NotEmpty(message="Favor informar a descrição")
     private String descricao;
+    
     private double estoque;    
+    
     @Temporal(javax.persistence.TemporalType.DATE)
+    
     private Date dtInclusao = new Date();
-    private BigDecimal valor;
+    
+    @NotNull(message="Favor informar o valor")
+    private BigDecimal valor = new BigDecimal("0.0");
 
     public Date getDtInclusao() {
         return dtInclusao;

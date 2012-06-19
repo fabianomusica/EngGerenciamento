@@ -25,23 +25,24 @@
                 </h:panelGroup>
                 <h:form>
                     <p:panel header="Novo Produto">
-                        <h:panelGrid columns="2">                   
-                            <h:outputLabel value="#{bundle.CreateProdutoLabel_id}" for="id" />
-                            <h:inputText id="id" value="#{produtoController.selected.id}" title="#{bundle.CreateProdutoTitle_id}" readonly="true" />
-                            
+                        <h:panelGrid columns="3">                   
                             <h:outputLabel value="#{bundle.CreateProdutoLabel_descricao}" for="descricao" />
                             <h:inputText id="descricao" value="#{produtoController.selected.descricao}" title="#{bundle.CreateProdutoTitle_descricao}"/>
+                            <h:message for="descricao"/>
                             
                             <h:outputLabel value="#{bundle.CreateProdutoLabel_estoque}" for="estoque" />
                             <h:inputText id="estoque" value="#{produtoController.selected.estoque}" title="#{bundle.CreateProdutoTitle_estoque}"/>
+                            <h:message for="estoque"/>
                             
                             <h:outputLabel value="#{bundle.CreateProdutoLabel_dtInclusao}" for="dtInclusao" />
                             <p:calendar id="dtInclusao" value="#{produtoController.selected.dtInclusao}" title="#{bundle.CreateProdutoTitle_dtInclusao}" showOn="button"/>
+                            <h:message for="dtInclusao"/>
                             
                              <h:outputLabel value="#{bundle.CreateProdutoLabel_valor}" for="valor" />
                             <h:inputText id="valor" value="#{produtoController.selected.valor}" title="#{bundle.CreateProdutoTitle_valor}">
                                <f:converter converterId="javax.faces.BigDecimal"/>
-                            </h:inputText>    
+                            </h:inputText>
+                            <h:message for="valor"/>
                         </h:panelGrid>
                       
                     </p:panel>
