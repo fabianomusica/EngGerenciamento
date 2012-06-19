@@ -26,30 +26,37 @@
             </h:panelGroup>
             
             <h:form>
-                <h:panelGrid columns="2" style="margin-left: 20px;">
+                <h:panelGrid columns="3" style="margin-left: 20px;">
                     <h:outputLabel value="#{bundle.EditClienteLabel_nome}" for="nome" />
                     <h:inputText id="nome" value="#{clienteController.selected.nome}" title="#{bundle.EditClienteTitle_nome}" />
+                    <h:message for="nome"/>
                     
                     <h:outputLabel value="#{bundle.EditClienteLabel_endereco}" for="endereco" />
                     <h:inputText id="endereco" value="#{clienteController.selected.endereco}" title="#{bundle.EditClienteTitle_endereco}" />
+                    <h:message for="endereco"/>
                    
                     <h:outputLabel value="#{bundle.EditClienteLabel_cidade}" for="cidade" />
-                    <h:inputText id="cidade" value="#{clienteController.selected.cidade}" title="#{bundle.EditClienteTitle_cidade}" />                    
+                    <h:inputText id="cidade" value="#{clienteController.selected.cidade}" title="#{bundle.EditClienteTitle_cidade}" />
+                    <h:message for="cidade"/>
                     
                     <h:outputLabel value="#{bundle.EditClienteLabel_fone}" for="fone" />
                     <h:inputText id="fone" value="#{clienteController.selected.fone}" title="#{bundle.EditClienteTitle_fone}" />
+                    <h:message for="fone"/>
                     
                     <h:outputLabel value="#{bundle.EditClienteLabel_rg}" for="rg" />
                     <h:inputText id="rg" value="#{clienteController.selected.rg}" title="#{bundle.EditClienteTitle_rg}" />
+                    <h:message for="rg"/>
 
                     <h:outputLabel value="#{bundle.EditClienteLabel_cpf}" for="cpf" />
                     <h:inputText id="cpf" value="#{clienteController.selected.cpf}" title="#{bundle.EditClienteTitle_cpf}" />
+                    <h:message for="cpf"/>
 
                     <h:outputLabel value="#{bundle.EditClienteLabel_sexo}" for="sexo" />
                     <h:selectOneRadio id="sexo" value="#{clienteController.selected.sexo}">
                         <f:selectItem itemValue="M" itemLabel="Masculino" />
                         <f:selectItem itemValue="F" itemLabel="Femenino" />
                     </h:selectOneRadio>
+                    <h:message for="sexo"/>
                     
                 </h:panelGrid>
                 <hr/>

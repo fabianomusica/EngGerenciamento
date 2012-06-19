@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -22,13 +25,23 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator="clienteKey")
     @SequenceGenerator(name="clienteKey", allocationSize=1)
     private Long id;
+    
+    @NotEmpty(message="Favor informar o nome")
     private String nome;
     private String endereco;
     private String cidade;
     private String fone;
+    
+    @NotEmpty(message="Favor informar o nome")
     private String cpf;
+    
+    @NotEmpty(message="Favor informar o rg")
     private String rg;
+    
+    @Email(message="Favor informar um email válido")
     private String email;
+    
+    @NotNull(message="Favor informar o sexo")
     private char sexo = 'M';
 
     public String getCpf() {
