@@ -7,6 +7,7 @@ import com.gerenciamento.model.Item;
 import com.gerenciamento.service.ContratoFacade;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -15,6 +16,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
@@ -235,11 +238,13 @@ public class ContratoController implements Serializable {
         }
     }
     
-    public void prepareCreateItem(){
+    public void prepareCreateItem(ActionEvent actionEvent){
+        System.out.println("prepareCreateItem");
         this.item =  new Item();
     }
     
-    public void createItem(){
+    public void createItem(ActionEvent actionEvent){
+        System.out.println("createItem");
         if(this.item != null && this.item.getContrato() == null){
             this.current.addItem(item);
         }
@@ -251,5 +256,12 @@ public class ContratoController implements Serializable {
     
     public void removeItem(Item item){
         current.removeItem(item);
+    }
+    
+    public void produtoChanged(){
+        System.out.println("Executou valuechange para produto " + this.item.getProduto());
+        if(this.item.getProduto() != null){
+            this.item.setValorUnitario(this.item.getProduto().getValor());
+        }
     }
 }
