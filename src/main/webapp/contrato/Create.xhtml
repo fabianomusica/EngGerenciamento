@@ -77,7 +77,7 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <p:commandButton action="#{contratoController.prepareEditItem(item)}" title="#{bundle.ListItemEditLink}" image="ui-icon-pencil" styleClass="gridButton" ajax="false"/>
+                            <p:commandButton action="#{contratoController.prepareEditItem(item)}" update="itensGrid" oncomplete="itemDialog.show();" title="#{bundle.ListItemEditLink}" image="ui-icon-pencil" styleClass="gridButton"/>
                             <h:outputText value=" "/>
                             <p:commandButton action="#{contratoController.destroyItem(item)}" title="#{bundle.ListItemDestroyLink}" image="ui-icon-trash" styleClass="gridButton" ajax="false"/>
                         </p:column>
@@ -98,7 +98,7 @@
                         <h:outputLabel value="#{bundle.CreateItemLabel_produto}" for="produto" />
                         <h:selectOneMenu id="produto" value="#{contratoController.item.produto}" title="#{bundle.CreateItemTitle_produto}" >
                             <f:selectItems value="#{produtoController.itemsAvailableSelectOne}"/>
-                            <p:ajax listener="#{contratoController.produtoChanged}" update="valorUnitario"/>
+                            <p:ajax listener="#{contratoController.produtoChanged}" update="valorUnitario total"/>
                         </h:selectOneMenu>
 
                         <h:outputLabel value="#{bundle.CreateItemLabel_quantidade}" for="quantidade" />
@@ -108,14 +108,12 @@
                         <h:inputText id="valorUnitario" value="#{contratoController.item.valorUnitario}" title="#{bundle.CreateItemTitle_valorUnitario}" />
 
                         <f:facet name="footer"> 
-                            <p:commandButton value="Gravar Item" actionListener="#{contratoController.createItem}" update="itemDlg, itensTable" image="ui-icon-check" process="itemDlg" />
+                            <p:commandButton value="Gravar Item" actionListener="#{contratoController.createAndNew}" update="itensGrid, itensTable" image="ui-icon-check" process="itemDlg" />
                             <p:commandButton value="Fechar" oncomplete="itemDialog.hide();" image="ui-icon-close" />
                         </f:facet>
                     </h:panelGrid> 
                 </h:form>
             </p:dialog>                        
-            
         </ui:define>
     </ui:composition>
-
 </html>

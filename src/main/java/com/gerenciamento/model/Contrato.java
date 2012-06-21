@@ -5,6 +5,7 @@
 package com.gerenciamento.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,9 +28,9 @@ public class Contrato implements Serializable {
     @ManyToOne
     private Cliente cliente;
     
-    private double total;
+    private BigDecimal total = new BigDecimal("0.0");
     
-    @OneToMany(mappedBy = "contrato")
+    @OneToMany(mappedBy = "contrato", cascade= CascadeType.ALL)
     private List<Item>itens = new ArrayList<Item>();
 
     private String descricao;
@@ -78,11 +79,11 @@ public class Contrato implements Serializable {
         this.emissao = emissao;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
@@ -115,6 +116,7 @@ public class Contrato implements Serializable {
         if(!itens.contains(item)){
             item.setContrato(this);
             itens.add(item);
+            this.total = this.total.add(item.getValorUnitario().multiply(item.getQuantidade()));
         }
             
     }

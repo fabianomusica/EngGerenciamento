@@ -239,15 +239,18 @@ public class ContratoController implements Serializable {
     }
     
     public void prepareCreateItem(ActionEvent actionEvent){
-        System.out.println("prepareCreateItem");
         this.item =  new Item();
     }
     
     public void createItem(ActionEvent actionEvent){
-        System.out.println("createItem");
         if(this.item != null && this.item.getContrato() == null){
             this.current.addItem(item);
         }
+    }
+    
+    public void createAndNew(ActionEvent actionEvent){
+        createItem(actionEvent);
+        prepareCreateItem(actionEvent);
     }
     
     public void prepareEditItem(Item item){

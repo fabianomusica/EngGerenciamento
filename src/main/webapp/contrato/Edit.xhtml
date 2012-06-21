@@ -16,35 +16,104 @@
                 </p:breadCrumb>           
             </h:form>
             <h:outputText value="#{bundle.EditContratoTitle}"></h:outputText>
+        </ui:define>
         
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditContratoLabel_cliente}" for="cliente" />
-                    <h:selectOneMenu id="cliente" value="#{contratoController.selected.cliente}" title="#{bundle.EditContratoTitle_cliente}" >
-                        <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditContratoLabel_emissao}" for="emissao" />
-                    <h:inputText id="emissao" value="#{contratoController.selected.emissao}" title="#{bundle.EditContratoTitle_emissao}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    
-                     <h:outputLabel value="#{bundle.EditContratoTitle_descricao}" for="descricao"/>
+            <h:form prependId="false">
+                <!-- Painel do Contrato-->
+                <p:panel>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.EditContratoLabel_emissao}" for="emissaoCal" />
+                        <p:calendar id="emissaoCal" value="#{contratoController.selected.emissao}" showOn="button"/>
+                        
+                        <h:outputLabel value="#{bundle.EditContratoLabel_cliente}" for="cliente" />
+                        <h:selectOneMenu id="cliente" value="#{contratoController.selected.cliente}" title="#{bundle.EditContratoTitle_cliente}" >
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+
+                        <h:outputLabel value="#{bundle.EditContratoTitle_descricao}" for="descricao"/>
                         <h:inputText id="descricao" value="#{contratoController.selected.descricao}" size="35" />
-                    
-                    <h:outputLabel value="#{bundle.EditContratoLabel_total}" for="total" />
-                    <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.EditContratoTitle_total}" readonly="true"/>
-                    
-                </h:panelGrid>
-                <p:commandLink action="#{contratoController.update}" value="#{bundle.EditContratoSaveLink}" ajax="false"/>               
-                <p:commandLink action="View" value="#{bundle.EditContratoViewLink}" immediate="true" ajax="false"/>               
-                <p:commandLink action="#{contratoController.prepareList}" value="#{bundle.EditContratoShowAllLink}" immediate="true" ajax="false"/>               
-                <p:commandLink value="#{bundle.EditContratoIndexLink}" action="/index" immediate="true" ajax="false"/>
+
+                        <h:outputLabel value="#{bundle.EditContratoLabel_total}" for="total" />
+                        <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.EditContratoTitle_total}" readonly="true"/>
+                    </h:panelGrid>
+                </p:panel>
+                
+                <!-- Painel dos Itens -->
+                <p:panel>
+                    <p:dataTable value="#{contratoController.selected.itens}" var="item" id="itensTable">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemTitle_produto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.CreateProdutoTitle_descricao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produto.descricao}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemTitle_quantidade}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quantidade}">
+                                <f:converter converterId="javax.faces.BigDecimal"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemTitle_valorUnitario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valorUnitario}">
+                                <f:converter converterId="javax.faces.BigDecimal"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <p:commandButton action="#{contratoController.prepareEditItem(item)}" update="itensGrid" oncomplete="itemDialog.show();" title="#{bundle.ListItemEditLink}" image="ui-icon-pencil" styleClass="gridButton"/>
+                            <h:outputText value=" "/>
+                            <p:commandButton action="#{contratoController.destroyItem(item)}" title="#{bundle.ListItemDestroyLink}" image="ui-icon-trash" styleClass="gridButton" ajax="false"/>
+                        </p:column>
+                    </p:dataTable>
+                    <p:commandButton id="novoItemtButton" actionListener="#{contratoController.prepareCreateItem}" update="itensGrid" oncomplete="itemDialog.show();" image="ui-icon-check" value="Novo Item"/>  
+                </p:panel>
+                
+                <div style="float:right">
+                    <p:commandButton action="#{contratoController.update}" value="#{bundle.EditContratoSaveLink}" ajax="false" image="ui-icon-check"/>
+                    <p:commandButton id="showAllButton" action="#{contratoController.prepareList}" value="#{bundle.EditContratoShowAllLink}" immediate="true" ajax="false" image="ui-icon-arrowreturnthick-1-w" title="Mostrar todos os contratos" />
+                </div>
             </h:form>
+            
+            <p:dialog header="Item do Contrato" widgetVar="itemDialog" resizable="true" id="itemDlg" modal="true">  
+                <p:messages />
+                <h:form prependId="false">
+                    <h:panelGrid columns="2" id="itensGrid">
+                        <h:outputLabel value="#{bundle.CreateItemLabel_produto}" for="produto" />
+                        <h:selectOneMenu id="produto" value="#{contratoController.item.produto}" title="#{bundle.CreateItemTitle_produto}" >
+                            <f:selectItems value="#{produtoController.itemsAvailableSelectOne}"/>
+                            <p:ajax listener="#{contratoController.produtoChanged}" update="valorUnitario total"/>
+                        </h:selectOneMenu>
+
+                        <h:outputLabel value="#{bundle.CreateItemLabel_quantidade}" for="quantidade" />
+                        <h:inputText id="quantidade" value="#{contratoController.item.quantidade}" title="#{bundle.CreateItemTitle_quantidade}" />
+
+                        <h:outputLabel value="#{bundle.CreateItemLabel_valorUnitario}" for="valorUnitario" />
+                        <h:inputText id="valorUnitario" value="#{contratoController.item.valorUnitario}" title="#{bundle.CreateItemTitle_valorUnitario}" />
+
+                        <f:facet name="footer"> 
+                            <p:commandButton value="Gravar Item" actionListener="#{contratoController.createAndNew}" update="itensGrid, itensTable" image="ui-icon-check" process="itemDlg" />
+                            <p:commandButton value="Fechar" oncomplete="itemDialog.hide();" image="ui-icon-close" />
+                        </f:facet>
+                    </h:panelGrid> 
+                </h:form>
+            </p:dialog>                        
         </ui:define>
     </ui:composition>
-
 </html>
