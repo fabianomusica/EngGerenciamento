@@ -17,10 +17,9 @@
             </h:form>
             <h:outputText value="#{bundle.EditContratoTitle}"></h:outputText>
         </ui:define>
-        
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:growl life="3000"/>
             </h:panelGroup>
             <h:form prependId="false">
                 <!-- Painel do Contrato-->
@@ -83,6 +82,14 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.CreateItemTitle_valorTotal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valorTotal}">
+                                <f:converter converterId="javax.faces.BigDecimal"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
                             <p:commandButton action="#{contratoController.prepareEditItem(item)}" update="itensGrid" oncomplete="itemDialog.show();" title="#{bundle.ListItemEditLink}" image="ui-icon-pencil" styleClass="gridButton"/>
@@ -100,23 +107,27 @@
             </h:form>
             
             <p:dialog header="Item do Contrato" widgetVar="itemDialog" resizable="true" id="itemDlg" modal="true">  
-                <p:messages />
                 <h:form prependId="false">
                     <h:panelGrid columns="2" id="itensGrid">
                         <h:outputLabel value="#{bundle.CreateItemLabel_produto}" for="produto" />
                         <h:selectOneMenu id="produto" value="#{contratoController.item.produto}" title="#{bundle.CreateItemTitle_produto}" >
                             <f:selectItems value="#{produtoController.itemsAvailableSelectOne}"/>
-                            <p:ajax listener="#{contratoController.produtoChanged}" update="valorUnitario total"/>
+                            <p:ajax listener="#{contratoController.produtoChanged}" update="valorUnitario valorTotal total"/>
                         </h:selectOneMenu>
 
                         <h:outputLabel value="#{bundle.CreateItemLabel_quantidade}" for="quantidade" />
-                        <h:inputText id="quantidade" value="#{contratoController.item.quantidade}" title="#{bundle.CreateItemTitle_quantidade}" />
+                        <h:inputText id="quantidade" value="#{contratoController.item.quantidade}" title="#{bundle.CreateItemTitle_quantidade}" >
+                            <p:ajax listener="#{contratoController.produtoChanged}" update="valorUnitario valorTotal total"/>
+                        </h:inputText>
 
                         <h:outputLabel value="#{bundle.CreateItemLabel_valorUnitario}" for="valorUnitario" />
                         <h:inputText id="valorUnitario" value="#{contratoController.item.valorUnitario}" title="#{bundle.CreateItemTitle_valorUnitario}" />
 
+                        <h:outputLabel value="#{bundle.CreateItemLabel_valorTotal}" for="valorTotal" />
+                        <h:inputText id="valorTotal" value="#{contratoController.item.valorTotal}" readonly="true" />
+
                         <f:facet name="footer"> 
-                            <p:commandButton value="Gravar Item" actionListener="#{contratoController.createAndNew}" update="itensGrid, itensTable" image="ui-icon-check" process="itemDlg" />
+                            <p:commandButton value="Gravar Item" actionListener="#{contratoController.createAndNew}" update="itensGrid itensTable total" image="ui-icon-check" process="itemDlg" />
                             <p:commandButton value="Fechar" oncomplete="itemDialog.hide();" image="ui-icon-close" />
                         </f:facet>
                     </h:panelGrid> 

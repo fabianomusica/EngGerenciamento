@@ -6,6 +6,7 @@ package com.gerenciamento.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import javax.persistence.*;
 
 /**
@@ -70,6 +71,10 @@ public class Item implements Serializable {
 
     public void setValorUnitario(BigDecimal valorUnitario) {
         this.valorUnitario = valorUnitario;
+    }
+    
+    public BigDecimal getValorTotal(){
+        return this.quantidade.multiply(this.getValorUnitario()).setScale(2, RoundingMode.HALF_EVEN);
     }
 
     @Override
