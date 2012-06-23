@@ -94,6 +94,7 @@ public class ContratoController implements Serializable {
 
     public String create() {
         try {
+            current.totalizar();
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ContratoCreated"));
             return prepareCreate();
@@ -111,6 +112,7 @@ public class ContratoController implements Serializable {
 
     public String update() {
         try {
+            current.totalizar();
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ContratoUpdated"));
             return "View";
@@ -246,6 +248,7 @@ public class ContratoController implements Serializable {
         if(this.item != null && this.item.getContrato() == null){
             this.current.addItem(item);
         }
+        this.current.totalizar();
     }
     
     public void createAndNew(ActionEvent actionEvent){
@@ -262,7 +265,6 @@ public class ContratoController implements Serializable {
     }
     
     public void produtoChanged(){
-        System.out.println("Executou valuechange para produto " + this.item.getProduto());
         if(this.item.getProduto() != null){
             this.item.setValorUnitario(this.item.getProduto().getValor());
         }

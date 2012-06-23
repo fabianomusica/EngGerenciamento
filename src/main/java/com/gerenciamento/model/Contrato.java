@@ -6,6 +6,7 @@ package com.gerenciamento.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -120,15 +121,23 @@ public class Contrato implements Serializable {
         if(!itens.contains(item)){
             item.setContrato(this);
             itens.add(item);
-            this.total = this.total.add(item.getValorUnitario().multiply(item.getQuantidade()));
         }
-            
     }
     
     public void removeItem(Item item){
         if(itens.contains(item)){
             item.setContrato(null);
             itens.remove(item);
+        }
+    }
+    
+    public void totalizar(){
+        this.total = new BigDecimal("0.0");
+        if(this.itens != null){
+            for(Item item: this.itens){
+                this.total = this.total.add(item.getValorTotal());
+                this.total = this.total.setScale(2, RoundingMode.HALF_EVEN);
+            }
         }
     }
     
