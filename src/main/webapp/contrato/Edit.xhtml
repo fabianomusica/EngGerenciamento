@@ -26,20 +26,27 @@
                 <!-- Painel do Contrato-->
                  <p:focus for="cliente"/>
                 <p:panel>
-                    <h:panelGrid columns="2">
+                    <h:panelGrid columns="3">
                         <h:outputLabel value="#{bundle.EditContratoLabel_emissao}" for="emissaoCal" />
                         <p:calendar id="emissaoCal" value="#{contratoController.selected.emissao}" showOn="button"/>
+                        <p:message for="emissaoCal"/>
                         
                         <h:outputLabel value="#{bundle.EditContratoLabel_cliente}" for="cliente" />
                         <h:selectOneMenu id="cliente" value="#{contratoController.selected.cliente}" title="#{bundle.EditContratoTitle_cliente}" >
                             <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>
+                            <f:ajax event="change" render="editcliente" execute="@this" />
                         </h:selectOneMenu>
+                        <p:message for="cliente" id="editcliente"/>
 
                         <h:outputLabel value="#{bundle.EditContratoTitle_descricao}" for="descricao"/>
-                        <h:inputText id="descricao" value="#{contratoController.selected.descricao}" size="35" />
-
+                        <h:inputText id="descricao" value="#{contratoController.selected.descricao}" size="35">
+                            <f:ajax event="change" render="editdescricao" execute="@this" />
+                        </h:inputText>    
+                        <p:message for="descricao" id="editdescricao"/>
+                        
                         <h:outputLabel value="#{bundle.EditContratoLabel_total}" for="total" />
                         <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.EditContratoTitle_total}" readonly="true"/>
+                        <p:message for="total"/>
                     </h:panelGrid>
                 </p:panel>
                 
