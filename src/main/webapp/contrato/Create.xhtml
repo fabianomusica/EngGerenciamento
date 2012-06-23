@@ -25,6 +25,7 @@
             <h:form prependId="false">
                 <!-- Painel do Contrato-->
                 <p:panel>
+                    <p:focus for="cliente"/>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="#{bundle.CreateContratoLabel_emissao}" for="emissaoCal" />
                         <p:calendar id="emissaoCal" value="#{contratoController.selected.emissao}" showOn="button"/>
