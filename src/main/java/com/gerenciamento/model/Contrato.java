@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -26,6 +28,7 @@ public class Contrato implements Serializable {
     private Date emissao;
     
     @ManyToOne
+    @NotNull(message="Informe o nome do cliente")
     private Cliente cliente;
     
     private BigDecimal total = new BigDecimal("0.0");
@@ -33,6 +36,7 @@ public class Contrato implements Serializable {
     @OneToMany(mappedBy = "contrato", cascade= CascadeType.ALL)
     private List<Item>itens = new ArrayList<Item>();
 
+    @NotEmpty(message="Informe a descrição")
     private String descricao;
 
     public String getDescricao() {
