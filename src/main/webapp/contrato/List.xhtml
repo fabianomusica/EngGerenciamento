@@ -41,14 +41,20 @@
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListContratoTitle_cliente}"/>
                                 </f:facet>
-                                <h:outputText value="#{item.cliente}"/>
+                                <h:outputText value="#{item.cliente.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.CreateClienteTitle_nome}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.cliente.nome}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListContratoTitle_emissao}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.emissao}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </h:outputText>
                             </p:column>
                             
@@ -58,11 +64,13 @@
                                 </f:facet>
                                 <h:outputText value="#{item.descricao}"/>
                             </p:column>
-                            <p:column>
+                            <p:column styleClass="valorMonetario">
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListContratoTitle_total}"/>
                                 </f:facet>
-                                <h:outputText value="#{item.total}"/>
+                                <h:outputText value="#{item.total}" >
+                                   <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                                </h:outputText>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">

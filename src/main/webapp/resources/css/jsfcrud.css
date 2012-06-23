@@ -151,3 +151,7 @@ tr.jsfcrud_even_row {
 .breadCrumb a:link{
     text-decoration: none;
 }
+
+.valorMonetario{
+    text-align: right;
+}
