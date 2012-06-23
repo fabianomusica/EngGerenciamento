@@ -23,7 +23,8 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2" style="margin-left: 20px;">
+                <p:focus for="descricao"/>
+                <h:panelGrid columns="3" style="margin-left: 20px;">
                     <h:outputLabel value="#{bundle.EditProdutoLabel_id}" for="id" />
                     <h:inputText id="id" value="#{produtoController.selected.id}" title="#{bundle.EditProdutoTitle_id}" readonly="true"/>
                     <h:message for="id"/>

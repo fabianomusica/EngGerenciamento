@@ -20,25 +20,34 @@
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:growl life="3000"/>
             </h:panelGroup>
             <h:form prependId="false">
                 <!-- Painel do Contrato-->
                 <p:panel>
-                    <h:panelGrid columns="2">
+                    <p:focus for="cliente"/>
+                    <h:panelGrid columns="3">
                         <h:outputLabel value="#{bundle.CreateContratoLabel_emissao}" for="emissaoCal" />
                         <p:calendar id="emissaoCal" value="#{contratoController.selected.emissao}" showOn="button"/>
+                        <p:message for="emissaoCal"/>
                         
                         <h:outputLabel value="#{bundle.CreateContratoLabel_cliente}" for="cliente" />
                         <h:selectOneMenu id="cliente" value="#{contratoController.selected.cliente}" title="#{bundle.CreateContratoTitle_cliente}" >
                             <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>
+                            <f:ajax event="change" render="clientemensagem" execute="@this" />
                         </h:selectOneMenu>
+                        <p:message for="cliente" id="clientemensagem"/>
                               
                         <h:outputLabel value="#{bundle.CreateContratoTitle_descricao}" for="descricao"/>
-                        <h:inputText id="descricao" value="#{contratoController.selected.descricao}" size="35" />
-                          
+                        <h:inputText id="descricao" value="#{contratoController.selected.descricao}" size="35">
+                            <f:ajax event="change" render="descricaomensagem" execute="@this" />
+                        </h:inputText>    
+                        <p:message for="descricao" id="descricaomensagem"/> 
+                        
+                        
                         <h:outputLabel value="#{bundle.CreateContratoLabel_total}" for="total" />
                         <h:inputText id="total" value="#{contratoController.selected.total}" title="#{bundle.CreateContratoTitle_total}" readonly="true" />
+                        <p:message for="total"/> 
                     </h:panelGrid>
                 </p:panel>
                 
@@ -85,14 +94,13 @@
                     <p:commandButton id="novoItemtButton" actionListener="#{contratoController.prepareCreateItem}" update="itensGrid" oncomplete="itemDialog.show();" image="ui-icon-check" value="Novo Item"/>  
                 </p:panel>
                 
-                <div style="float:right">
+                <div style="float: right">
                     <p:commandButton action="#{contratoController.create}" value="#{bundle.CreateContratoSaveLink}" ajax="false" image="ui-icon-check"/>
                     <p:commandButton id="showAllButton" action="#{contratoController.prepareList}" value="#{bundle.CreateContratoShowAllLink}" immediate="true" ajax="false" image="ui-icon-arrowreturnthick-1-w" title="Mostrar todos os contratos" />
                 </div>
             </h:form>
             
             <p:dialog header="Item do Contrato" widgetVar="itemDialog" resizable="true" id="itemDlg" modal="true">  
-                <p:messages />
                 <h:form prependId="false">
                     <h:panelGrid columns="2" id="itensGrid">
                         <h:outputLabel value="#{bundle.CreateItemLabel_produto}" for="produto" />

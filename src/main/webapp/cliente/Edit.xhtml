@@ -26,6 +26,7 @@
             </h:panelGroup>
             
             <h:form>
+                <p:focus for="nome"/>
                 <h:panelGrid columns="3" style="margin-left: 20px;">
                     <h:outputLabel value="#{bundle.EditClienteLabel_nome}" for="nome" />
                     <h:inputText id="nome" value="#{clienteController.selected.nome}" title="#{bundle.EditClienteTitle_nome}" />
