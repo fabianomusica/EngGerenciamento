@@ -5,7 +5,6 @@
       xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core">
     
-    
     <h:head>
         <title>Number One Formaturas</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
@@ -17,22 +16,13 @@
             <div id="menu">
             <ul>
                 <h:form>
-                <li> <p:commandLink action="/cliente/List" value="Clientes" ajax="false"/></li>
-                </h:form>
-                <h:form>
-                <li> <p:commandLink action="/contrato/List" value="Contratos" ajax="false"/></li>
-                </h:form>
-                <h:form>
-                    <li><p:commandLink action="/item/List" value="Itens" ajax="false"/></li>
-                </h:form>
-                <h:form>
-                    <li><p:commandLink action="/produto/List" value="Produtos" ajax="false"/></li>
+                    <li> <p:commandLink action="/cliente/List" value="Clientes" ajax="false"/></li>
+                    <li> <p:commandLink action="/produto/List" value="Produtos" ajax="false"/></li>
+                    <li> <p:commandLink action="/contrato/List" value="Contratos" ajax="false"/></li>
                 </h:form>            
-             
             </ul>
              
             <img src="/gerenciamento/faces/imagens/bodyb.png" alt="Formaturas"/>
-            
              
             </div>
             
@@ -41,9 +31,5 @@
             </div>
         </div>
     </h:body>
-
-
-
-
 </html>
 

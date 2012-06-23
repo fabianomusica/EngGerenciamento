@@ -43,19 +43,21 @@
                             </f:facet>
                             <h:outputText value="#{item.descricao}"/>
                         </p:column>
-                        <p:column>
+                        <p:column styleClass="valorMonetario">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProdutoTitle_estoque}"/>
                             </f:facet>
-                            <h:outputText value="#{item.estoque}"/>
+                            <h:outputText value="#{item.estoque}">
+                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                            </h:outputText>
                         </p:column>
                         
-                        <p:column>
+                        <p:column styleClass="valorMonetario">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProdutoTitle_valor}"/>
                             </f:facet>
                             <h:outputText value="#{item.valor}">
-                                <f:converter converterId="javax.faces.BigDecimal"/>
+                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
                             </h:outputText>
                         </p:column>
                         
