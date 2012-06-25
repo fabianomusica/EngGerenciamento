@@ -3,38 +3,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ViewProdutoTitle}"></h:outputText>
+             <h:form>
+                <p:breadCrumb styleClass="breadCrumb">
+                    <p:menuitem value="Home" action="/index" ajax="false"/>
+                    <p:menuitem value="Produtos" action="#{produtoController.prepareList}" ajax="false" />
+                    <p:menuitem value="Editar produto" url="#" ajax="false" />
+                </p:breadCrumb>            
+            </h:form>
+        <h:outputText value="#{bundle.ViewProdutoTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewProdutoLabel_descricao}"/>
-                    <h:outputText value="#{produtoController.selected.descricao}" title="#{bundle.ViewProdutoTitle_descricao}"/>
-                    <h:outputText value="#{bundle.ViewProdutoLabel_estoque}"/>
-                    <h:outputText value="#{produtoController.selected.estoque}" title="#{bundle.ViewProdutoTitle_estoque}"/>
-                    <h:outputText value="#{bundle.ViewProdutoLabel_id}"/>
-                    <h:outputText value="#{produtoController.selected.id}" title="#{bundle.ViewProdutoTitle_id}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{produtoController.destroyAndView}" value="#{bundle.ViewProdutoDestroyLink}"/>
-                <br />
-                <br />
-                <h:commandLink action="Edit" value="#{bundle.ViewProdutoEditLink}"/>
-                <br />
-                <h:commandLink action="#{produtoController.prepareCreate}" value="#{bundle.ViewProdutoCreateLink}" />
-                <br />
-                <h:commandLink action="#{produtoController.prepareList}" value="#{bundle.ViewProdutoShowAllLink}"/>
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.ViewProdutoIndexLink}" action="/index" immediate="true" />
-
+                <p:panel header="Atualização de cliente">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="#{bundle.ViewProdutoLabel_descricao}"/>
+                        <h:outputText value="#{produtoController.selected.descricao}" title="#{bundle.ViewProdutoTitle_descricao}"/>
+                        <h:outputText value="#{bundle.ViewProdutoLabel_estoque}"/>
+                        <h:outputText value="#{produtoController.selected.estoque}" title="#{bundle.ViewProdutoTitle_estoque}"/>
+                        <h:outputText value="#{bundle.ViewProdutoLabel_id}"/>
+                        <h:outputText value="#{produtoController.selected.id}" title="#{bundle.ViewProdutoTitle_id}"/>
+                    </h:panelGrid>
+                    
+                    <div style="float: right;margin-left: 5px;margin-top: 15px">
+                        <p:commandButton action="#{produtoController.destroyAndView}" value="#{bundle.ViewProdutoDestroyLink}" title="Deletar produto" image="ui-icon-trash" ajax="false"/>
+                        <p:commandButton action="Edit" value="#{bundle.ViewProdutoEditLink}" title="Editar produto" image="ui-icon-pencil" ajax="false"/>
+                        <p:commandButton action="#{produtoController.prepareList}" value="#{bundle.ViewProdutoShowAllLink}" title="Listar produtos" image="ui-icon-arrowreturnthick-1-w" ajax="false"/>
+                    </div>
+            </p:panel>
             </h:form>
         </ui:define>
     </ui:composition>
